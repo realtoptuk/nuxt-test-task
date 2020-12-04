@@ -36,6 +36,7 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/pwa',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -47,6 +48,25 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: 'https://rickandmortyapi.com/api/',
+  },
+
+  pwa: {
+    icon: {
+      fileName: 'pwa.png',
+    },
+    workbox: {
+      cleanupOutdatedCaches: true,
+      runtimeCaching: [
+        {
+          urlPattern: 'https://fonts.gstatic.com/',
+          handler: 'StaleWhileRevalidate',
+        },
+        {
+          urlPattern: 'https://rickandmortyapi.com/api/character/avatar',
+          handler: 'StaleWhileRevalidate',
+        },
+      ],
+    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
